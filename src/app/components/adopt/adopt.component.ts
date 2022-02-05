@@ -16,7 +16,10 @@ export class AdoptComponent implements OnInit {
   constructor(private service: PersonServiceService, private router: Router) { }
 
   ngOnInit(): void {
+    this.getChildren();
+  }
 
+  getChildren(){
     this.service.getChildren().subscribe(data => {
       if (data.length > 0)
         this.children = data;
@@ -27,13 +30,17 @@ export class AdoptComponent implements OnInit {
           text: 'No data to display'
         });
     });
-
   }
 
   adopt(idChild: number) {
     this.service.adopt(idChild).subscribe(data => {
-      Swal.fire('Thank you...', 'You submitted succesfully!', 'success')
-      this.router.navigate(["get"]);
+      Swal.fire({
+        icon: 'success',
+        title: 'Child adopted',
+        showConfirmButton: false,
+        timer: 1500
+      });
+      this.getChildren();
     })
   }
 

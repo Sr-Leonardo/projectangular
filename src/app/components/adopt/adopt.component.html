@@ -17,7 +17,7 @@
                 <td>{{c.birth}}</td>
                 <td>{{c.type}}</td>
                 <td>
-                    <button class="btn btn-success"> <b>Adopt</b> </button>
+                    <button (click)="adopt(c.idPerson)" class="btn btn-success"> <b>Adopt</b> </button>
                 </td>
             </tr>
         </tbody>
