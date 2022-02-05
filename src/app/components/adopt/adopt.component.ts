@@ -16,10 +16,6 @@ export class AdoptComponent implements OnInit {
   constructor(private service: PersonServiceService, private router: Router) { }
 
   ngOnInit(): void {
-    this.getChildren();
-  }
-
-  getChildren(){
     this.service.getChildren().subscribe(data => {
       if (data.length > 0)
         this.children = data;
@@ -29,6 +25,12 @@ export class AdoptComponent implements OnInit {
           title: 'Oops...',
           text: 'No data to display'
         });
+    });
+  }
+
+  getChildren(){
+    this.service.getChildren().subscribe(data => {
+        this.children = data;
     });
   }
 
