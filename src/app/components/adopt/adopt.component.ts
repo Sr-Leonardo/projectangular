@@ -18,13 +18,20 @@ export class AdoptComponent implements OnInit {
   ngOnInit(): void {
 
     this.service.getChildren().subscribe(data => {
-      this.children = data;
+      if (data.length > 0)
+        this.children = data;
+      else
+        Swal.fire({
+          icon: 'info',
+          title: 'Oops...',
+          text: 'No data to display'
+        });
     });
 
   }
 
-  adopt(person: Person) {
-    this.service.adopt(person).subscribe(data => {
+  adopt(idChild: number) {
+    this.service.adopt(idChild).subscribe(data => {
       Swal.fire('Thank you...', 'You submitted succesfully!', 'success')
       this.router.navigate(["get"]);
     })

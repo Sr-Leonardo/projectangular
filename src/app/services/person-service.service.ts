@@ -20,8 +20,8 @@ export class PersonServiceService {
     return this.http.get<Person[]>(`${this.Url}getChildren`);
   }
 
-  adopt(person: Person) {
-    return this.http.post<Person>(this.Url, person);
+  adopt(id: number) {
+    return this.http.post(`${this.Url}`, id);
   }
 
   existMother() {
@@ -41,7 +41,7 @@ export class PersonServiceService {
   }
 
   delete(id: number) {
-    return this.http.delete(`${this.Url}delete/${id}`);
+    return this.http.delete(`${this.Url}delete?id=${id}`);
   }
 
   existFather() {
