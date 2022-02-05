@@ -1,0 +1,24 @@
+<div class="container">
+    <table class="table table-striped table-light table-hover">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Full Name</th>
+                <th>Birth Date</th>
+                <th>Type</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let p of people">
+                <td>{{p.idPerson}}</td>
+                <td>{{p.fullName}}</td>
+                <td>{{p.birth}}</td>
+                <td>{{p.type}}</td>
+                <td>
+                    <button (click)="delete(p.idPerson)" class="btn btn-danger"> <b>Delete</b> </button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
