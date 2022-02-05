@@ -25,11 +25,19 @@ export class PersonServiceService {
   }
 
   existMother() {
-    return this.http.get<String>(`${this.Url}getMother`)
+    return this.http.get<boolean>(`${this.Url}getMother`)
   }
 
   addChild(person: PersonModel) {
     return this.http.post(`${this.Url}addChild`, person);
+  }
+
+  addFather(person: PersonModel) {
+    return this.http.post(`${this.Url}addFather`, person);
+  }
+
+  addMother(person: PersonModel) {
+    return this.http.post(`${this.Url}addMother`, person);
   }
 
   delete(id: number) {
