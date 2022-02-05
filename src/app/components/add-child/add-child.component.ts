@@ -20,7 +20,12 @@ export class AddChildComponent implements OnInit {
 
   createChild(person:PersonModel){
     this.service.addChild(person).subscribe( data =>{
-      Swal.fire('Done!', 'You submitted succesfully!', 'success')
+      Swal.fire({
+        icon: 'success',
+        title: 'Child has been saved',
+        showConfirmButton: false,
+        timer: 1500
+      });
       this.router.navigate(["get"]);
     })
   }

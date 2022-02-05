@@ -11,9 +11,7 @@ import Swal from 'sweetalert2';
 export class AppComponent {
   title = 'angularprojectbdb';
 
-  constructor(private router: Router, private service: PersonServiceService) {
-
-  }
+  constructor(private router: Router, private service: PersonServiceService) { }
 
   getPeople() {
     this.router.navigate(["get"]);
@@ -28,55 +26,47 @@ export class AppComponent {
   }
 
   existMother() {
-    this.service.existMother().subscribe(res => {
-      if (res.match("OK"))
-        this.router.navigate(["addMother"]);
-      else
+    this.service.existMother().subscribe(
+      (res) => {
+        if (res)
+          this.router.navigate(['addMother']);
+        else
+          Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: "There is already a mother"
+          })
+      },
+      (error) => {
         Swal.fire({
           icon: 'error',
           title: 'Oops...',
-          text: res.toString()
-        })
-    });
+          text: error.error.text
+        });
+      }
+    );
   }
 
   existFather() {
-    // this.service.existFather().subscribe(res => {
-    //   if (res.match("OK"))
-    //     this.router.navigate(["addFather"]);
-    //   else
-    //     Swal.fire({
-    //       icon: 'error',
-    //       title: 'Oops...',
-    //       text: ''
-    //     })
-    // });
-
     this.service.existFather().subscribe(
       (res) => {
-        console.log(res);
-      },
-      (error) => {
-            Swal.fire({
+        if (res)
+          this.router.navigate(['addFather']);
+        else
+          Swal.fire({
             icon: 'error',
             title: 'Oops...',
-            text: error.error.text
-          });
+            text: "There is already a father"
+          })
+      },
+      (error) => {
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: error.error.text
+        });
       }
     );
-
-    const locationsSubscription = this.service.existFather().subscribe({
-      next(position) {
-        console.log('Current Position: ', position);
-      },
-      error(msg) {
-        console.log('Error Getting Location: ', msg);
-      }
-    });
-
-    console.log(locationsSubscription);
-
-
   }
 
 
