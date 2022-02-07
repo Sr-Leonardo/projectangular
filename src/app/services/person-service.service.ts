@@ -28,6 +28,10 @@ export class PersonServiceService {
     return this.http.get<boolean>(`${this.Url}getMother`)
   }
 
+  validatePerson(person: PersonModel) {
+    return this.http.post(`${this.Url}validatePerson`, person);
+  }
+
   addChild(person: PersonModel) {
     return this.http.post(`${this.Url}addChild`, person);
   }

@@ -19,15 +19,26 @@ export class AddChildComponent implements OnInit {
   }
 
   createChild(person:PersonModel){
-    this.service.addChild(person).subscribe( data =>{
-      Swal.fire({
-        icon: 'success',
-        title: 'Child has been saved',
-        showConfirmButton: false,
-        timer: 1500
-      });
-      this.router.navigate(["get"]);
-    })
+    this.service.validatePerson(person).subscribe( res =>{
+      if (res){
+        this.service.addChild(person).subscribe( data =>{
+          Swal.fire({
+            icon: 'success',
+            title: 'Child has been saved',
+            showConfirmButton: false,
+            timer: 1500
+          });
+          this.router.navigate(["get"]);
+        })
+      }else{
+        Swal.fire({
+          icon: 'info',
+          title: 'Sorry..',
+          text: 'There is already a child with this information.'
+        });
+      }
+    });
+    
   }
 
 }
