@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Person } from 'src/app/models/Person';
-import { PersonServiceService } from 'src/app/services/person-service.service';
+import { ClientDto } from 'src/app/models/client';
+import { TransactionService } from 'src/app/services/trasction.service';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -11,18 +11,18 @@ import Swal from 'sweetalert2';
 })
 export class GetComponent implements OnInit {
 
-  people: Person[] = [];
+  clients: ClientDto[] = [];
 
-  constructor(private service: PersonServiceService, private router: Router) { }
+  constructor(private service: TransactionService, private router: Router) { }
 
   ngOnInit(): void {
     this.getPeople();
   }
 
   getPeople() {
-    this.service.getPeople().subscribe(data => {
+    this.service.getCients().subscribe(data => {
       if (data.length > 0)
-        this.people = data;
+        this.clients = data;
       else
         Swal.fire({
           icon: 'info',
@@ -31,39 +31,4 @@ export class GetComponent implements OnInit {
         });
     });
   }
-
-  delete(id: number) {
-    Swal.fire({
-      title: 'Are you sure?',
-      text: "You won't be able to revert this!",
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
-      confirmButtonText: 'Yes, delete it!'
-    }).then((result) => {
-      if (result.isConfirmed) {
-        this.service.delete(id).subscribe(
-          (res) => {
-            Swal.fire(
-              'Deleted!',
-              'The person has been deleted.',
-              'success'
-            )
-            this.getPeople();
-          },
-          (error) => {
-            Swal.fire({
-              icon: 'error',
-              title: 'Oops...',
-              text: error.error.text
-            });
-          }
-        );
-      }
-    })
-
-
-  }
-
 }

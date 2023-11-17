@@ -3,21 +3,19 @@
         <thead>
             <tr>
                 <th>Id</th>
-                <th>Full Name</th>
-                <th>Birth Date</th>
-                <th>Type</th>
-                <th>Actions</th>
+                <th>Nombre</th>
+                <th>Documento</th>
+                <th>Banco</th>
+                <th>Cantidad</th>
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let p of people">
-                <td>{{p.idPerson}}</td>
-                <td>{{p.fullName}}</td>
-                <td>{{p.birth}}</td>
-                <td>{{p.type}}</td>
-                <td>
-                    <button (click)="delete(p.idPerson)" class="btn btn-danger"> <b>Delete</b> </button>
-                </td>
+            <tr *ngFor="let p of clients">
+                <td>{{p.id}}</td>
+                <td>{{p.name}}</td>
+                <td>{{p.documentId}}</td>
+                <td>{{p.bankId}}</td>
+                <td>{{p.amount}}</td>
             </tr>
         </tbody>
     </table>

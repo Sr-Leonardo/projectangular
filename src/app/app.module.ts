@@ -4,22 +4,16 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { GetComponent } from './components/get/get.component';
-import { AdoptComponent } from './components/adopt/adopt.component';
-import { PersonServiceService } from './services/person-service.service';
+import { TransactionService } from './services/trasction.service';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
-import { AddFatherComponent } from './components/add-father/add-father.component';
-import { AddMotherComponent } from './components/add-mother/add-mother.component';
-import { AddChildComponent } from './components/add-child/add-child.component';
+import { TransactionComponent } from './components/transaction/transaction.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     GetComponent,
-    AdoptComponent,
-    AddFatherComponent,
-    AddMotherComponent,
-    AddChildComponent
+    TransactionComponent
   ],
   imports: [
     BrowserModule,
@@ -27,7 +21,7 @@ import { AddChildComponent } from './components/add-child/add-child.component';
     FormsModule,
     HttpClientModule
   ],
-  providers: [PersonServiceService],
+  providers: [TransactionService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
